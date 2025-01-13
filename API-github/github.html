@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api in js</title>
+    <style>
+        body{
+            background-color: #212121;
+            color:wheat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:20px;
+
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap:20px;
+        }
+        .dynamic-card{
+            background-color: bisque;
+            height: 400px;
+            width: 400px;
+            color:black;
+            border: 3px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:15px;
+        }
+        #my-img{
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 3px solid #212121;
+        }
+        p{
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <button class="btn">click me</button>
+
+    <script>
+        let githubArr = [
+            'mochi-vidhi',
+            'hiteshchoudhary',
+            'Tamanna985',
+            'Vishakha-Prjapati'
+        ];
+        let card = document.querySelector('.btn');
+        let body = document.querySelector('body');
+        card.addEventListener('click',()=>{
+            githubArr.forEach(username => {
+                let requestURL = `https://api.github.com/users/${username}`;
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET',requestURL);
+                xhr.onreadystatechange = function(){
+                console.log(xhr.readyState)
+                if(xhr.readyState === 4){
+                     
+                        let data = JSON.parse(this.responseText);
+                         
+                        let bigdiv = document.createElement('div');
+                        bigdiv.setAttribute('class','container');
+
+                        let div = document.createElement('div');
+                        div.setAttribute('class','dynamic-card');
+    
+                        let img = document.createElement('img');
+                        img.setAttribute('src',data.avatar_url);
+                        img.setAttribute('alt','user Avtar');
+                        img.setAttribute('id','my-img');
+    
+                        let followrs = document.createElement('p');
+                        followrs.innerText = `my followers are ${data.followers}`
+    
+                        let following = document.createElement('p');
+                        following.innerText = `my following are ${data.following}`
+                        
+                        let h2 = document.createElement('h2');
+                        h2.innerText = `${data.name}`;
+
+                        
+                        div.appendChild(img);
+                        div.appendChild(h2);
+                        div.appendChild(followrs);
+                        div.appendChild(following);
+                        body.appendChild(bigdiv);
+                        bigdiv.appendChild(div);
+                       
+                }
+            }
+            xhr.send();
+        });
+    });
+    </script>
+</body>
+</html>

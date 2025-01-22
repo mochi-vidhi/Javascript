@@ -1,0 +1,20 @@
+.nav-link:hover{
+    background-color: lightgrey;
+    /* border-radius: 1.5rem; */
+}
+h1{
+    font-size: 3.5rem;
+    color: rgb(63, 58, 58);
+}
+.box{
+    height: 500px;
+    width: 500px;
+    border-radius: 1.5rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-left:auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:1.5rem
+}
